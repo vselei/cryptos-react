@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 
+import useSelectCoins from '../hooks/useSelectCoins';
+
 const InputSubmit = styled.input`
   background-color: #9497ff;
   border: none;
@@ -19,6 +21,10 @@ const InputSubmit = styled.input`
 `;
 
 const Form = () => {
+  const [SelectCoins] = useSelectCoins();
+
+  SelectCoins();
+
   return (
     <form>
       <InputSubmit type="submit" value="cotar" />
