@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { useState, useEffect } from 'react';
 
 import Form from './components/Form';
+import Result from './components/Result';
 
 import CryptoImg from './img/cryptos.png';
 
@@ -69,6 +70,7 @@ const App = () => {
       <div>
         <Heading>Cotação das Cripto Moedas Atualmente</Heading>
         <Form setCoins={setCoins} />
+        {result.PRICE && <Result result={result} />}
       </div>
     </Container>
   );
