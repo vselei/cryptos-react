@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import useSelect from '../hooks/useSelect';
 
 import { coins } from '../data/coins';
+import { useEffect, useState } from 'react';
 
 const InputSubmit = styled.input`
   background-color: #9497ff;
@@ -24,13 +25,39 @@ const InputSubmit = styled.input`
 `;
 
 const Form = () => {
+  const [cryptoCoins, setCryptoCoins] = useState([]);
+
   const [coin, SelectCoins] = useSelect('Selecionar Moeda', coins);
-  // const [SelectCrypto] = useSelect('Selecionar Cripto moeda');
+  const [cryptos, SelectCrypto] = useSelect(
+    'Selecionar Cripto moeda',
+    cryptoCoins
+  );
+
+  useEffect(() => {
+    const fetching = async () => {
+      const url = `https://min-api.cryptocompare.com/data/top/mktcapfull?limit=10&tsym=USD`;
+      const response = await fetch(url);
+      const result = await response.json();
+
+      const cryptos = result.Data.map(coin => {
+        const crypto = {
+          id: coin.CoinInfo.Name,
+          name: coin.CoinInfo.FullName
+        };
+
+        return crypto;
+      });
+
+      setCryptoCoins(cryptos);
+    };
+
+    fetching();
+  }, []);
 
   return (
     <form>
       <SelectCoins />
-      {/* <SelectCrypto /> */}
+      <SelectCrypto />
       <InputSubmit type="submit" value="cotar" />
     </form>
   );
