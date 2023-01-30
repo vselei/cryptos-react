@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 
 import Form from './components/Form';
 import Result from './components/Result';
+import Spinner from './components/Spinner';
 
 import CryptoImg from './img/cryptos.png';
 
@@ -47,10 +48,14 @@ const Heading = styled.h1`
 const App = () => {
   const [coins, setCoins] = useState({});
   const [result, setResult] = useState({});
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (Object.keys(coins).length > 0) {
       const quoteCrypto = async () => {
+        setLoading(true);
+        setResult({});
+
         const { coin, crypto } = coins;
 
         const url = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${crypto}&tsyms=${coin}`;
@@ -58,6 +63,8 @@ const App = () => {
         const result = await response.json();
 
         setResult(result.DISPLAY[crypto][coin]);
+
+        setLoading(false);
       };
 
       quoteCrypto();
@@ -70,6 +77,7 @@ const App = () => {
       <div>
         <Heading>Cotação das Cripto Moedas Atualmente</Heading>
         <Form setCoins={setCoins} />
+        {loading && <Spinner />}
         {result.PRICE && <Result result={result} />}
       </div>
     </Container>

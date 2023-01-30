@@ -4,6 +4,7 @@ const Container = styled.div`
   color: #fff;
   font-family: 'Lato', sans-serif;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 1rem;
   margin-top: 30px;
