@@ -25,7 +25,7 @@ const InputSubmit = styled.input`
   }
 `;
 
-const Form = () => {
+const Form = ({ setCoins }) => {
   const [cryptoCoins, setCryptoCoins] = useState([]);
   const [error, setError] = useState(false);
 
@@ -65,6 +65,10 @@ const Form = () => {
     }
 
     setError(false);
+    setCoins({
+      coin,
+      crypto
+    });
   };
 
   return (
