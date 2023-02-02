@@ -1,11 +1,9 @@
 # Cryptos React
 
 ### Features
-- [x] Criação do cliente
-- [x] Leitura do cliente
-- [x] Edição do cliente
-- [x] Remoção do cliente
-- [x] localStorage para armazenar os clientes
+- [x] Custom Hooks do seletor de moedas
+- [x] Requisição para API
+- [x] Exibição dos resultados
 
 ##
 
